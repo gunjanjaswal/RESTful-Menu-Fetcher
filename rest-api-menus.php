@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: WP REST Menus Plugin
+ * Plugin Name: REST API Menus
  * Description: Exposes WordPress menus via a custom REST API endpoint.
  * Version: 1.1.0
  * Author: Gunjan Jaswal
@@ -18,10 +18,28 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly.
 }
 
-class WP_REST_Menus_Plugin {
+class REST_API_Menus {
 
     public function __construct() {
         add_action( 'rest_api_init', array( $this, 'register_routes' ) );
+        add_filter( 'plugin_row_meta', array( $this, 'add_plugin_row_meta' ), 10, 2 );
+    }
+
+    /**
+     * Add 'Buy me a coffee' link to plugin row meta in plugins list.
+     *
+     * @param array  $links Plugin row meta links.
+     * @param string $file  Plugin file name.
+     * @return array Modified links.
+     */
+    public function add_plugin_row_meta( $links, $file ) {
+        if ( strpos( $file, 'rest-api-menus.php' ) !== false ) {
+            $new_links = array(
+                'donate' => '<a href="https://buymeacoffee.com/gunjanjaswal" target="_blank">Buy me a coffee</a>',
+            );
+            $links = array_merge( $links, $new_links );
+        }
+        return $links;
     }
 
     /**
@@ -130,7 +148,7 @@ class WP_REST_Menus_Plugin {
         $nested  = $request->get_param( 'nested' );
 
         if ( ! $menu ) {
-            return new WP_Error( 'wp_rest_menu_not_found', __( 'Menu not found.', 'wp-rest-menus-plugin' ), array( 'status' => 404 ) );
+            return new WP_Error( 'wp_rest_menu_not_found', __( 'Menu not found.', 'rest-api-menus' ), array( 'status' => 404 ) );
         }
 
         $menu_items = wp_get_nav_menu_items( $menu_id );
@@ -177,14 +195,14 @@ class WP_REST_Menus_Plugin {
         $locations = get_nav_menu_locations();
 
         if ( ! isset( $locations[ $location ] ) ) {
-            return new WP_Error( 'wp_rest_menu_location_not_found', __( 'Menu location not found.', 'wp-rest-menus-plugin' ), array( 'status' => 404 ) );
+            return new WP_Error( 'wp_rest_menu_location_not_found', __( 'Menu location not found.', 'rest-api-menus' ), array( 'status' => 404 ) );
         }
 
         $menu_id = (int) $locations[ $location ];
         $menu    = wp_get_nav_menu_object( $menu_id );
 
         if ( ! $menu ) {
-            return new WP_Error( 'wp_rest_menu_not_assigned', __( 'No menu assigned to this location.', 'wp-rest-menus-plugin' ), array( 'status' => 404 ) );
+            return new WP_Error( 'wp_rest_menu_not_assigned', __( 'No menu assigned to this location.', 'rest-api-menus' ), array( 'status' => 404 ) );
         }
 
         $menu_items = wp_get_nav_menu_items( $menu_id );
@@ -263,4 +281,4 @@ class WP_REST_Menus_Plugin {
     }
 }
 
-new WP_REST_Menus_Plugin();
+new REST_API_Menus();

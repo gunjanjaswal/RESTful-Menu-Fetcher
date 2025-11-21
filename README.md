@@ -1,4 +1,4 @@
-# WP REST Menus Plugin
+# REST API Menus
 
 A WordPress plugin that exposes navigation menus via custom REST API endpoints. Perfect for headless WordPress, decoupled applications, and external integrations.
 
@@ -15,7 +15,7 @@ A WordPress plugin that exposes navigation menus via custom REST API endpoints. 
 ## 📦 Installation
 
 1. Download or clone this repository
-2. Copy the `wp-rest-menus-plugin` folder to your WordPress `wp-content/plugins` directory
+2. Copy the `rest-api-menus` folder to your WordPress `wp-content/plugins` directory
 3. Activate the plugin from **WP Admin → Plugins**
 4. Ensure you have menus configured under **Appearance → Menus**
 
@@ -205,8 +205,8 @@ curl "https://your-site.com/wp-json/wp-rest-menu/v1/menus/2?nested=true"
 
 ### File Structure
 ```
-wp-rest-menus-plugin/
-├── wp-rest-menus-plugin.php  # Main plugin file
+rest-api-menus/
+├── rest-api-menus.php  # Main plugin file
 ├── readme.txt                # WordPress.org readme
 └── README.md                 # GitHub readme
 ```

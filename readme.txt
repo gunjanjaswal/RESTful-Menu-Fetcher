@@ -1,17 +1,18 @@
-=== WP REST Menus Plugin ===
+=== REST API Menus ===
 Contributors: gunjanjaswal
 Tags: rest api, menus, navigation, headless, json
 Requires at least: 5.0
-Tested up to: 6.6
+Tested up to: 6.8
 Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Donate link: https://buymeacoffee.com/gunjanjaswal
 
 Expose WordPress menus via a custom REST API endpoint for headless and external applications.
 
 == Description ==
 
-WP REST Menus Plugin adds custom REST API routes to expose your WordPress navigation menus as JSON.
+REST API Menus adds custom REST API routes to expose your WordPress navigation menus as JSON.
 
 **Base namespace:** `wp-rest-menu/v1`
 
@@ -38,8 +39,8 @@ This is useful for headless WordPress setups or any external app that needs to r
 
 == Installation ==
 
-1. Upload the `wp-rest-menus-plugin` folder to your `wp-content/plugins` directory.
-2. Activate **WP REST Menus Plugin** from the Plugins screen in WordPress.
+1. Upload the `rest-api-menus` folder to your `wp-content/plugins` directory.
+2. Activate **REST API Menus** from the Plugins screen in WordPress.
 3. Ensure you have at least one menu configured under **Appearance → Menus**.
 
 == Usage ==
@@ -71,6 +72,12 @@ If you find this plugin useful, you can support the developer:
 - Website: https://gunjanjaswal.me
 - GitHub: https://github.com/gunjanjaswal/Wp-Rest-Menus-Plugin
 - Buy Me a Coffee: https://buymeacoffee.com/gunjanjaswal
+
+== Contributing ==
+
+Contributions, issues, and feature requests are welcome!
+GitHub: https://github.com/gunjanjaswal/Wp-Rest-Menus-Plugin
+Issues: https://github.com/gunjanjaswal/Wp-Rest-Menus-Plugin/issues
 
 == Changelog ==
 
