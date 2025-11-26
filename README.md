@@ -1,4 +1,4 @@
-# REST API Menus
+# RESTful Menu Fetcher
 
 A WordPress plugin that exposes navigation menus via custom REST API endpoints. Perfect for headless WordPress, decoupled applications, and external integrations.
 
@@ -15,17 +15,17 @@ A WordPress plugin that exposes navigation menus via custom REST API endpoints. 
 ## 📦 Installation
 
 1. Download or clone this repository
-2. Copy the `rest-api-menus` folder to your WordPress `wp-content/plugins` directory
+2. Copy the `restful-menu-fetcher` folder to your WordPress `wp-content/plugins` directory
 3. Activate the plugin from **WP Admin → Plugins**
 4. Ensure you have menus configured under **Appearance → Menus**
 
 ## 🔌 API Endpoints
 
-Base namespace: `wp-rest-menu/v1`
+Base namespace: `restful-menu/v1`
 
 ### Get All Menus
 ```
-GET /wp-json/wp-rest-menu/v1/menus
+GET /wp-json/restful-menu/v1/menus
 ```
 Returns all registered menus with their locations and items.
 
@@ -44,18 +44,18 @@ Returns all registered menus with their locations and items.
 
 ### Get Single Menu by ID
 ```
-GET /wp-json/wp-rest-menu/v1/menus/{id}
+GET /wp-json/restful-menu/v1/menus/{id}
 ```
 Returns a specific menu and its items.
 
 **Example:**
 ```
-GET /wp-json/wp-rest-menu/v1/menus/2
+GET /wp-json/restful-menu/v1/menus/2
 ```
 
 ### Get All Menu Locations
 ```
-GET /wp-json/wp-rest-menu/v1/locations
+GET /wp-json/restful-menu/v1/locations
 ```
 Returns all registered menu locations with assigned menus.
 
@@ -73,13 +73,13 @@ Returns all registered menu locations with assigned menus.
 
 ### Get Menu by Location
 ```
-GET /wp-json/wp-rest-menu/v1/locations/{location}
+GET /wp-json/restful-menu/v1/locations/{location}
 ```
 Returns the menu assigned to a specific location.
 
 **Example:**
 ```
-GET /wp-json/wp-rest-menu/v1/locations/primary
+GET /wp-json/restful-menu/v1/locations/primary
 ```
 
 ## 🌳 Nested Menu Structure
@@ -87,8 +87,8 @@ GET /wp-json/wp-rest-menu/v1/locations/primary
 Add `?nested=true` to any menu endpoint to get a hierarchical tree structure:
 
 ```
-GET /wp-json/wp-rest-menu/v1/menus/2?nested=true
-GET /wp-json/wp-rest-menu/v1/locations/primary?nested=true
+GET /wp-json/restful-menu/v1/menus/2?nested=true
+GET /wp-json/restful-menu/v1/locations/primary?nested=true
 ```
 
 **Flat structure (default):**
@@ -150,12 +150,12 @@ Each menu item includes:
 ### JavaScript (Fetch API)
 ```javascript
 // Get primary menu
-fetch('https://your-site.com/wp-json/wp-rest-menu/v1/locations/primary')
+fetch('https://your-site.com/wp-json/restful-menu/v1/locations/primary')
   .then(response => response.json())
   .then(menu => console.log(menu));
 
 // Get nested menu structure
-fetch('https://your-site.com/wp-json/wp-rest-menu/v1/menus/2?nested=true')
+fetch('https://your-site.com/wp-json/restful-menu/v1/menus/2?nested=true')
   .then(response => response.json())
   .then(menu => console.log(menu));
 ```
@@ -168,7 +168,7 @@ function Navigation() {
   const [menu, setMenu] = useState(null);
 
   useEffect(() => {
-    fetch('https://your-site.com/wp-json/wp-rest-menu/v1/locations/primary?nested=true')
+    fetch('https://your-site.com/wp-json/restful-menu/v1/locations/primary?nested=true')
       .then(res => res.json())
       .then(data => setMenu(data));
   }, []);
@@ -188,13 +188,13 @@ function Navigation() {
 ### cURL
 ```bash
 # Get all menus
-curl https://your-site.com/wp-json/wp-rest-menu/v1/menus
+curl https://your-site.com/wp-json/restful-menu/v1/menus
 
 # Get menu by location
-curl https://your-site.com/wp-json/wp-rest-menu/v1/locations/primary
+curl https://your-site.com/wp-json/restful-menu/v1/locations/primary
 
 # Get nested structure
-curl "https://your-site.com/wp-json/wp-rest-menu/v1/menus/2?nested=true"
+curl "https://your-site.com/wp-json/restful-menu/v1/menus/2?nested=true"
 ```
 
 ## 🛠️ Development
@@ -205,8 +205,8 @@ curl "https://your-site.com/wp-json/wp-rest-menu/v1/menus/2?nested=true"
 
 ### File Structure
 ```
-rest-api-menus/
-├── rest-api-menus.php  # Main plugin file
+restful-menu-fetcher/
+├── restful-menu-fetcher.php  # Main plugin file
 ├── readme.txt                # WordPress.org readme
 └── README.md                 # GitHub readme
 ```
@@ -220,7 +220,7 @@ GPL v2 or later
 **Gunjan Jaswal**
 
 - Website: [https://gunjanjaswal.me](https://gunjanjaswal.me)
-- GitHub: [https://github.com/gunjanjaswal/Wp-Rest-Menus-Plugin](https://github.com/gunjanjaswal/Wp-Rest-Menus-Plugin)
+- GitHub: [https://github.com/gunjanjaswal/RESTful-Menu-Fetcher](https://github.com/gunjanjaswal/RESTful-Menu-Fetcher)
 
 ## ☕ Support
 
@@ -230,7 +230,7 @@ If you find this plugin useful, consider supporting the developer:
 
 ## 🤝 Contributing
 
-Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/gunjanjaswal/Wp-Rest-Menus-Plugin/issues).
+Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/gunjanjaswal/RESTful-Menu-Fetcher/issues).
 
 ## ⭐ Show Your Support
 

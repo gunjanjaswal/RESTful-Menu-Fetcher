@@ -1,11 +1,12 @@
 <?php
 /**
- * Plugin Name: REST API Menus
+ * Plugin Name: RESTful Menu Fetcher
  * Description: Exposes WordPress menus via a custom REST API endpoint.
  * Version: 1.1.0
  * Author: Gunjan Jaswal
  * Author URI: https://gunjanjaswal.me
- * Plugin URI: https://github.com/gunjanjaswal/Wp-Rest-Menus-Plugin
+ * Plugin URI: https://github.com/gunjanjaswal/RESTful-Menu-Fetcher
+ * Text Domain: restful-menu-fetcher
  * License: GPL2
  *
  * This plugin registers custom REST API routes to expose WordPress menus
@@ -18,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly.
 }
 
-class REST_API_Menus {
+class Restful_Menu_Fetcher {
 
     public function __construct() {
         add_action( 'rest_api_init', array( $this, 'register_routes' ) );
@@ -33,7 +34,7 @@ class REST_API_Menus {
      * @return array Modified links.
      */
     public function add_plugin_row_meta( $links, $file ) {
-        if ( strpos( $file, 'rest-api-menus.php' ) !== false ) {
+        if ( strpos( $file, 'restful-menu-fetcher.php' ) !== false ) {
             $new_links = array(
                 'donate' => '<a href="https://buymeacoffee.com/gunjanjaswal" target="_blank">Buy me a coffee</a>',
             );
@@ -47,7 +48,7 @@ class REST_API_Menus {
      */
     public function register_routes() {
         register_rest_route(
-            'wp-rest-menu/v1',
+            'restful-menu/v1',
             '/menus',
             array(
                 'methods'  => 'GET',
@@ -63,7 +64,7 @@ class REST_API_Menus {
         );
 
         register_rest_route(
-            'wp-rest-menu/v1',
+            'restful-menu/v1',
             '/menus/(?P<id>[0-9]+)',
             array(
                 'methods'  => 'GET',
@@ -79,7 +80,7 @@ class REST_API_Menus {
         );
 
         register_rest_route(
-            'wp-rest-menu/v1',
+            'restful-menu/v1',
             '/locations',
             array(
                 'methods'  => 'GET',
@@ -89,7 +90,7 @@ class REST_API_Menus {
         );
 
         register_rest_route(
-            'wp-rest-menu/v1',
+            'restful-menu/v1',
             '/locations/(?P<location>[a-zA-Z0-9_-]+)',
             array(
                 'methods'  => 'GET',
@@ -148,7 +149,7 @@ class REST_API_Menus {
         $nested  = $request->get_param( 'nested' );
 
         if ( ! $menu ) {
-            return new WP_Error( 'wp_rest_menu_not_found', __( 'Menu not found.', 'rest-api-menus' ), array( 'status' => 404 ) );
+            return new WP_Error( 'restful_menu_not_found', __( 'Menu not found.', 'restful-menu-fetcher' ), array( 'status' => 404 ) );
         }
 
         $menu_items = wp_get_nav_menu_items( $menu_id );
@@ -195,14 +196,14 @@ class REST_API_Menus {
         $locations = get_nav_menu_locations();
 
         if ( ! isset( $locations[ $location ] ) ) {
-            return new WP_Error( 'wp_rest_menu_location_not_found', __( 'Menu location not found.', 'rest-api-menus' ), array( 'status' => 404 ) );
+            return new WP_Error( 'restful_menu_location_not_found', __( 'Menu location not found.', 'restful-menu-fetcher' ), array( 'status' => 404 ) );
         }
 
         $menu_id = (int) $locations[ $location ];
         $menu    = wp_get_nav_menu_object( $menu_id );
 
         if ( ! $menu ) {
-            return new WP_Error( 'wp_rest_menu_not_assigned', __( 'No menu assigned to this location.', 'rest-api-menus' ), array( 'status' => 404 ) );
+            return new WP_Error( 'restful_menu_not_assigned', __( 'No menu assigned to this location.', 'restful-menu-fetcher' ), array( 'status' => 404 ) );
         }
 
         $menu_items = wp_get_nav_menu_items( $menu_id );
@@ -281,4 +282,4 @@ class REST_API_Menus {
     }
 }
 
-new REST_API_Menus();
+new Restful_Menu_Fetcher();
