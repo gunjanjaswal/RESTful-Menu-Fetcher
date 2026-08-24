@@ -9,7 +9,7 @@
  * Text Domain: endpointy-menus
  * License: GPL2
  * Requires at least: 5.0
- * Tested up to: 7.0
+ * Tested up to: 7.1
  *
  * This plugin registers custom REST API routes to expose WordPress menus
  * so they can be consumed by external applications.
